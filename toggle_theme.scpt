@@ -1,5 +1,7 @@
 tell application "System Preferences"
 	launch
+	activate
+	set miniaturized of windows to false
 	reveal pane id "com.apple.preference.general"
 end tell
 
