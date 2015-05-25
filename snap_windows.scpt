@@ -35,4 +35,18 @@ on maximize()
 	end tell
 end maximize
 
-maximize()
+on left_half()
+	set front_app to (path to frontmost application as Unicode text)
+	tell application front_app
+		set the bounds of the first window to {x1, y1, x1 + (x2 - x1) / 2, y2}
+	end tell
+end left_half
+
+on top_half()
+	set front_app to (path to frontmost application as Unicode text)
+	tell application front_app
+		set the bounds of the first window to {x1, y1, x2, y1 + (y2 - y1) / 2}
+	end tell
+end top_half
+
+top_half()
