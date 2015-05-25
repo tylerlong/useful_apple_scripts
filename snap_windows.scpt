@@ -1,7 +1,4 @@
-global x1
-global y1
-global x2
-global y2
+global x1, y1, x2, y2
 
 tell application "System Events" to tell process "Dock"
 	set dock_size to size in list 1
@@ -28,25 +25,29 @@ else if (dock_x + dock_width) = x2 then
 	set x2 to (x2 - dock_width)
 end if
 
-on maximize()
-	set front_app to (path to frontmost application as Unicode text)
-	tell application front_app
-		set the bounds of the first window to {x1, y1, x2, y2}
+on set_bounds(bounds)
+	tell application "System Events"
+		set frontApp to first application process whose frontmost is true
+		set frontAppName to name of frontApp
+		tell process frontAppName
+			tell (1st window whose value of attribute "AXMain" is true)
+				set postion to {item 1 of bounds, item 2 of bounds}
+				set size to {(item 3 of bounds) - (item 1 of bounds), (item 4 of bounds) - (item 2 of bounds)}
+			end tell
+		end tell
 	end tell
+end set_bounds
+
+on maximize()
+	set_bounds({x1, y1, x2, y2})
 end maximize
 
 on left_half()
-	set front_app to (path to frontmost application as Unicode text)
-	tell application front_app
-		set the bounds of the first window to {x1, y1, x1 + (x2 - x1) / 2, y2}
-	end tell
+	set_bounds({x1, y1, x1 + (x2 - x1) / 2, y2})
 end left_half
 
 on top_half()
-	set front_app to (path to frontmost application as Unicode text)
-	tell application front_app
-		set the bounds of the first window to {x1, y1, x2, y1 + (y2 - y1) / 2}
-	end tell
+	set_bounds({x1, y1, x2, y1 + (y2 - y1) / 2})
 end top_half
 
-top_half()
+maximize()
