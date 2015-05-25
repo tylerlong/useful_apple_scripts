@@ -1,3 +1,8 @@
+global x1
+global y1
+global x2
+global y2
+
 tell application "System Events" to tell process "Dock"
 	set dock_size to size in list 1
 	set dock_width to (item 1 of dock_size)
@@ -23,8 +28,11 @@ else if (dock_x + dock_width) = x2 then
 	set x2 to (x2 - dock_width)
 end if
 
+on maximize()
+	set front_app to (path to frontmost application as Unicode text)
+	tell application front_app
+		set the bounds of the first window to {x1, y1, x2, y2}
+	end tell
+end maximize
 
-set front_app to (path to frontmost application as Unicode text)
-tell application front_app
-	set the bounds of the first window to {x1, y1, x2, y2}
-end tell
+maximize()
