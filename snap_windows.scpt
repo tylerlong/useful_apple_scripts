@@ -31,7 +31,7 @@ on set_bounds(bounds)
 		set frontAppName to name of frontApp
 		tell process frontAppName
 			tell (1st window whose value of attribute "AXMain" is true)
-				set postion to {item 1 of bounds, item 2 of bounds}
+				set position to {item 1 of bounds, item 2 of bounds}
 				set size to {(item 3 of bounds) - (item 1 of bounds), (item 4 of bounds) - (item 2 of bounds)}
 			end tell
 		end tell
@@ -46,8 +46,16 @@ on left_half()
 	set_bounds({x1, y1, x1 + (x2 - x1) / 2, y2})
 end left_half
 
+on right_half()
+	set_bounds({x1 + (x2 - x1) / 2, y1, x2, y2})
+end right_half
+
 on top_half()
 	set_bounds({x1, y1, x2, y1 + (y2 - y1) / 2})
 end top_half
 
-maximize()
+on bottom_half()
+	set_bounds({x1, y1 + (y2 - y1) / 2, x2, y2})
+end bottom_half
+
+left_half()
