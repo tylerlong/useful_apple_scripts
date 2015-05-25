@@ -74,4 +74,8 @@ on right_bottom()
 	set_bounds({x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2, x2, y2})
 end right_bottom
 
-left_half()
+on central()
+	set_bounds({x1 + (x2 - x1) / 4, y1 + (y2 - y1) / 4, x2 - (x2 - x1) / 4, y2 - (y2 - y1) / 4})
+end central
+
+maximize()
