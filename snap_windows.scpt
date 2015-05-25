@@ -58,4 +58,20 @@ on bottom_half()
 	set_bounds({x1, y1 + (y2 - y1) / 2, x2, y2})
 end bottom_half
 
+on left_top()
+	set_bounds({x1, y1, x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2})
+end left_top
+
+on left_bottom()
+	set_bounds({x1, y1 + (y2 - y1) / 2, x1 + (x2 - x1) / 2, y2})
+end left_bottom
+
+on right_top()
+	set_bounds({x1 + (x2 - x1) / 2, y1, x2, y1 + (y2 - y1) / 2})
+end right_top
+
+on right_bottom()
+	set_bounds({x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2, x2, y2})
+end right_bottom
+
 left_half()
